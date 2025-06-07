@@ -206,3 +206,30 @@ footer {
   width: 100%;
   box-shadow: 0 -3px 10px rgb(0 0 0 / 0.3);
 }
+.search-filter {
+  max-width: 900px;
+  margin: 2rem auto;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-filter input,
+.search-filter select {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  min-width: 160px;
+  max-width: 250px;
+  transition: border-color 0.3s ease;
+}
+
+.search-filter input:focus,
+.search-filter select:focus {
+  outline: none;
+  border-color: #ff6600;
+}
+
