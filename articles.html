@@ -19,8 +19,22 @@
 </header>
 
 <main>
-  <section class="search-filter">
-    <input type="search" id="searchInput" placeholder="Rechercher un article..." />
+ <section class="search-filter">
+  <input type="search" id="searchInput" placeholder="Rechercher un article..." />
+
+  <select id="categoryFilter">
+    <option value="all">Toutes catégories</option>
+  </select>
+
+  <select id="sortFilter">
+    <option value="default">Trier par</option>
+    <option value="price-asc">Prix croissant</option>
+    <option value="price-desc">Prix décroissant</option>
+    <option value="date-desc">Date (du plus récent)</option>
+    <option value="date-asc">Date (du plus ancien)</option>
+  </select>
+</section>
+
   </section>
 
   <section id="articlesContainer" class="articles-grid">
