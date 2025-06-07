@@ -1,22 +1,11 @@
-[
-  {
-    "id": "sac-vintage",
-    "title": "Sac à dos vintage",
-    "price": 45,
-    "category": "Accessoires",
-    "image": "images/sac.jpg",
-    "description": "Sac à dos en cuir vintage, état impeccable.",
-    "isNew": true,
-    "linkVinted": "https://www.vinted.fr/item/123456"
-  },
-  {
-    "id": "montre-classique",
-    "title": "Montre classique",
-    "price": 120,
-    "category": "Montres",
-    "image": "images/montre.jpg",
-    "description": "Montre analogique élégante, bracelet cuir.",
-    "isNew": false,
-    "linkVinted": "https://www.vinted.fr/item/654321"
-  }
-]
+{
+  "id": "sac-vintage",
+  "title": "Sac à dos vintage",
+  "price": 45,
+  "category": "Accessoires",
+  "image": "images/sac.jpg",
+  "description": "Sac à dos en cuir vintage, état impeccable.",
+  "isNew": true,
+  "linkVinted": "https://www.vinted.fr/item/123456",
+  "date": "2025-05-10"
+}
