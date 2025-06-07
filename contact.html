@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact - Ma Boutique</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header>
+  <nav class="menu">
+    <ul>
+      <li><a href="index.html">Accueil</a></li>
+      <li><a href="articles.html">Articles</a></li>
+      <li><a href="contact.html" class="active">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="contact-section">
+    <h1>Contactez-nous</h1>
+    <p>Une question, un conseil, ou juste un bonjour ? Écrivez-nous !</p>
+
+    <form action="https://formspree.io/f/xvgrznya" method="POST" id="contactForm">
+      <label for="name">Nom *</label>
+      <input type="text" id="name" name="name" placeholder="Votre nom" required />
+
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="_replyto" placeholder="votre.email@example.com" required />
+
+      <label for="message">Message *</label>
+      <textarea id="message" name="message" rows="6" placeholder="Votre message ici..." required></textarea>
+
+      <button type="submit">Envoyer</button>
+    </form>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Ma Boutique | Contact & réseaux sociaux</p>
+</footer>
+
+<script>
+  const form = document.getElementById('contactForm');
+  form.addEventListener('submit', e => {
+    e.preventDefault();
+
+    fetch(form.action, {
+      method: 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      if (response.ok) {
+        alert('Merci pour votre message, nous vous répondrons bientôt.');
+        form.reset();
+      } else {
+        alert('Oups, une erreur est survenue. Veuillez réessayer.');
+      }
+    }).catch(() => {
+      alert('Oups, une erreur est survenue. Veuillez réessayer.');
+    });
+  });
+</script>
+
+</body>
+</html>
