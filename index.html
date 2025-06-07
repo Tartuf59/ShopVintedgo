@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Accueil - Ma Boutique</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header>
+  <nav class="menu">
+    <ul>
+      <li><a href="index.html" class="active">Accueil</a></li>
+      <li><a href="articles.html">Articles</a></li>
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section class="hero">
+    <div class="hero-content">
+      <h1>Bienvenue sur Ma Boutique</h1>
+      <p>Découvrez nos articles soigneusement sélectionnés, vintage et uniques.</p>
+      <p>Parcourez la collection et trouvez votre prochain coup de cœur.</p>
+    </div>
+  </section>
+
+  <section class="latest-article-container">
+    <h2>Article le plus récent</h2>
+    <div id="latestArticle" class="article-card featured-article">
+      <!-- Injection JS -->
+      <p>Chargement...</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 Ma Boutique | Contact & réseaux sociaux</p>
+</footer>
+
+<script>
+  // Charger articles et afficher le plus récent
+  fetch('data/articles.json')
+    .then(res => res.json())
+    .then(articles => {
+      if (!articles || articles.length === 0) {
+        document.getElementById('latestArticle').innerHTML = '<p>Aucun article disponible.</p>';
+        return;
+      }
+      // On trie par date si tu as une date sinon par ordre JSON (on prend le dernier)
+      // Ici je prends le dernier de la liste (supposé le plus récent)
+      const latest = articles[articles.length - 1];
+
+      const container = document.getElementById('latestArticle');
+      container.innerHTML = `
+        ${latest.isNew ? '<div class="new-badge">Nouveau</div>' : ''}
+        <img src="${latest.image}" alt="${latest.title}" />
+        <div class="article-content">
+          <h3 class="article-title">${latest.title}</h3>
+          <p class="article-price">${latest.price} €</p>
+          <p>${latest.description.substring(0, 120)}...</p>
+          <button onclick="window.location.href='article.html?id=${latest.id}'">Voir l'article</button>
+        </div>
+      `;
+    })
+    .catch(() => {
+      document.getElementById('latestArticle').innerHTML = '<p>Erreur de chargement.</p>';
+    });
+</script>
+
+</body>
+</html>
