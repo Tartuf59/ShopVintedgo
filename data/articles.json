@@ -20,5 +20,28 @@
   "isNew": true,
   "linkVinted": "https://www.vinted.fr/items/6303208209",
   "date": "2025-05-08"
+},
+  {
+  "id": "Boxer",
+  "title": "Boxer Robot Interactif Black Édition",
+  "price": 35,
+  "category": "Robot",
+  "image": "images/Boxer.PNG",
+  "description": "Boxer Robot Interactif 6 ans et +
+Limited Black Édition",
+  "isNew": true,
+  "linkVinted": "https://www.vinted.fr/items/6305524822",
+  "date": "2025-05-10"
+},
+    {
+  "id": "Puzzle-Pokémon",
+  "title": "Puzzle Pokémon 300 pièces n°13 245 4",
+  "price": 4,
+  "category": "Puzzle",
+  "image": "images/Puzzle.PNG",
+  "description": "Ravensburger Puzzle Pokémon 300 pièces complet n°13 245 4 9ans et + 49x36 cm",
+  "isNew": true,
+  "linkVinted": "https://www.vinted.fr/items/6303068468",
+  "date": "2025-05-11"
 }
 ]
