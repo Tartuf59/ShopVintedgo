@@ -386,3 +386,40 @@ h1 {
   from { opacity: 0; transform: translateY(30px); }
   to { opacity: 1; transform: translateY(0); }
 }
+.product-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.thumbnails {
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.thumbnails img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.3s, border-color 0.3s;
+}
+
+.thumbnails img:hover {
+  transform: scale(1.1);
+  border-color: #ff6600;
+}
+
+.fade {
+  animation: fadeInImage 0.3s ease;
+}
+
+@keyframes fadeInImage {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
