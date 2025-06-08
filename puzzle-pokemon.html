@@ -19,9 +19,16 @@
 </header>
 
 <main class="product-page">
-  <div class="product-card">
-    <img src="images/Puzzle Pokémon.PNG" alt="Puzzle Pokémon 300 pièces" class="product-image" />
-    
+<div class="product-gallery">
+  <img id="mainImage" src="images/Puzzle Pokémon.PNG" alt="Puzzle Pokémon" class="product-image" />
+
+  <div class="thumbnails">
+    <img src="images/Puzzle Pokémon.PNG" alt="Vue 1" onclick="changeImage(this)">
+    <img src="images/puzzle2.png" alt="Vue 2" onclick="changeImage(this)">
+    <img src="images/puzzle3.png" alt="Vue 3" onclick="changeImage(this)">
+    <img src="images/puzzle4.png" alt="Vue 4" onclick="changeImage(this)">
+  </div>
+</div>
     <div class="product-info">
       <h1>Puzzle Pokémon 300 pièces</h1>
       <span class="tag new">NOUVEAU</span>
@@ -39,6 +46,14 @@
 <footer>
   <p>© 2025 ShopVintedgo</p>
 </footer>
+<script>
+  function changeImage(thumbnail) {
+    const main = document.getElementById('mainImage');
+    main.src = thumbnail.src;
+    main.classList.add('fade');
+    setTimeout(() => main.classList.remove('fade'), 300);
+  }
+</script>
 
 </body>
 </html>
