@@ -1,3 +1,9 @@
+const articlePages = {
+  "Puzzle-Pokémon": "puzzle-pokemon.html",
+  "Vtech-Kidizoom": "vtech-kidizoom.html",
+  "Action-Caméra": "action-camera.html",
+  "Boxer": "boxer.html"
+};
 const articlesContainer = document.getElementById('articlesContainer');
 const searchInput = document.getElementById('searchInput');
 const categoryFilter = document.getElementById('categoryFilter');
@@ -75,10 +81,14 @@ function displayArticles(list) {
   list.forEach(article => {
     const articleCard = document.createElement('div');
     articleCard.className = 'article-card';
-    articleCard.onclick = () => {
-      window.location.href = `article.html?id=${article.id}`;
-    };
-
+articleCard.onclick = () => {
+  const page = articlePages[article.id];
+  if (page) {
+    window.location.href = page;
+  } else {
+    alert("Page de l'article non trouvée.");
+  }
+};
     articleCard.innerHTML = `
       ${article.isNew ? '<div class="new-badge">Nouveau</div>' : ''}
       <img src="${article.image}" alt="${article.title}" />
