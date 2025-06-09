@@ -423,3 +423,70 @@ h1 {
   from { opacity: 0.5; }
   to { opacity: 1; }
 }
+.product-page {
+  max-width: 900px;
+  margin: auto;
+  padding: 2rem;
+}
+
+.product-gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-image {
+  width: 300px;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.thumbnail-container {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.thumb {
+  width: 60px;
+  cursor: pointer;
+  border-radius: 6px;
+  opacity: 0.8;
+  transition: transform 0.3s, opacity 0.3s;
+}
+.thumb:hover {
+  transform: scale(1.1);
+  opacity: 1;
+}
+
+.product-info {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.price {
+  font-size: 1.5rem;
+  color: #444;
+}
+
+.new-badge {
+  display: inline-block;
+  background-color: #ff4c4c;
+  color: white;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 0.8rem;
+}
+
+.buy-button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 10px 20px;
+  background-color: #4CAF50;
+  color: white;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+.buy-button:hover {
+  background-color: #45a049;
+}
