@@ -38,6 +38,14 @@
 </footer>
 
 <script>
+  // Associe les IDs aux fichiers HTML personnalisés
+  const articlePages = {
+    "Puzzle-Pokémon": "puzzle-pokemon.html",
+    "Vtech-Kidizoom": "vtech-kidizoom.html",
+    "Action-Caméra": "action-camera.html",
+    "Boxer": "boxer.html"
+  };
+
   // Charger articles et afficher le plus récent
   fetch('data/articles.json')
     .then(res => res.json())
@@ -46,11 +54,14 @@
         document.getElementById('latestArticle').innerHTML = '<p>Aucun article disponible.</p>';
         return;
       }
-      // On trie par date si tu as une date sinon par ordre JSON (on prend le dernier)
-      // Ici je prends le dernier de la liste (supposé le plus récent)
-      const latest = articles[articles.length - 1];
+
+      // Trier par date décroissante pour garantir que le plus récent est bien sélectionné
+      articles.sort((a, b) => new Date(b.date) - new Date(a.date));
+      const latest = articles[0];
 
       const container = document.getElementById('latestArticle');
+      const articleLink = articlePages[latest.id] || "#";
+
       container.innerHTML = `
         ${latest.isNew ? '<div class="new-badge">Nouveau</div>' : ''}
         <img src="${latest.image}" alt="${latest.title}" />
@@ -58,7 +69,7 @@
           <h3 class="article-title">${latest.title}</h3>
           <p class="article-price">${latest.price} €</p>
           <p>${latest.description.substring(0, 120)}...</p>
-          <button onclick="window.location.href='article.html?id=${latest.id}'">Voir l'article</button>
+          <button onclick="window.location.href='${articleLink}'">Voir l'article</button>
         </div>
       `;
     })
@@ -66,6 +77,7 @@
       document.getElementById('latestArticle').innerHTML = '<p>Erreur de chargement.</p>';
     });
 </script>
+
 
 </body>
 </html>
