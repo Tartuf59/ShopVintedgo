@@ -1,47 +1,93 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const thumbnails = document.querySelectorAll(".thumbnails img");
-  const mainImage = document.querySelector(".main-image");
-
-  thumbnails.forEach((thumb) => {
-    thumb.addEventListener("click", function () {
-      mainImage.src = this.src;
-      mainImage.classList.add("fade");
-      setTimeout(() => mainImage.classList.remove("fade"), 300);
-    });
-  });
-
+document.addEventListener("DOMContentLoaded", () => {
+  const container = document.getElementById("articlesContainer");
   const searchInput = document.getElementById("searchInput");
-  const articles = document.querySelectorAll(".article-card");
+  const categoryFilter = document.getElementById("categoryFilter");
+  const sortFilter = document.getElementById("sortFilter");
 
-  searchInput.addEventListener("input", function () {
-    const filter = this.value.toLowerCase();
+  let allArticles = [];
 
-    articles.forEach((article) => {
-      const title = article.querySelector(".article-title").textContent.toLowerCase();
-      if (title.includes(filter)) {
-        article.style.display = "";
-      } else {
-        article.style.display = "none";
-      }
+  // Chargement du JSON
+  fetch("data/articles.json")
+    .then(response => {
+      if (!response.ok) throw new Error("Erreur lors du chargement des articles.");
+      return response.json();
+    })
+    .then(data => {
+      allArticles = data;
+      populateCategoryFilter(data);
+      renderArticles(data);
+    })
+    .catch(error => {
+      console.error("Erreur : ", error);
+      container.innerHTML = "<p>Impossible de charger les articles.</p>";
     });
-  });
 
-  const sortSelect = document.getElementById("sortSelect");
-
-  if (sortSelect) {
-    sortSelect.addEventListener("change", function () {
-      const value = this.value;
-      const container = document.querySelector(".articles-grid");
-      const cards = Array.from(container.children);
-
-      cards.sort((a, b) => {
-        const priceA = parseFloat(a.querySelector(".article-price").textContent.replace(/[^\d.-]/g, '')) || 0;
-        const priceB = parseFloat(b.querySelector(".article-price").textContent.replace(/[^\d.-]/g, '')) || 0;
-        return value === "asc" ? priceA - priceB : priceB - priceA;
-      });
-
-      container.innerHTML = "";
-      cards.forEach(card => container.appendChild(card));
+  function populateCategoryFilter(articles) {
+    const categories = [...new Set(articles.map(a => a.category))];
+    categories.forEach(cat => {
+      const option = document.createElement("option");
+      option.value = cat;
+      option.textContent = cat;
+      categoryFilter.appendChild(option);
     });
   }
+
+  function renderArticles(articles) {
+    container.innerHTML = "";
+    if (articles.length === 0) {
+      container.innerHTML = "<p>Aucun article trouvé.</p>";
+      return;
+    }
+
+    articles.forEach(article => {
+      const card = document.createElement("div");
+      card.className = "article-card";
+      card.innerHTML = `
+        ${article.isNew ? '<div class="new-badge">Nouveau</div>' : ""}
+        <a href="${article.linkVinted}" target="_blank">
+          <img src="${article.image}" alt="${article.title}" />
+          <div class="article-content">
+            <h2>${article.title}</h2>
+            <p>${article.price} €</p>
+          </div>
+        </a>
+      `;
+      container.appendChild(card);
+    });
+  }
+
+  function applyFilters() {
+    let filtered = [...allArticles];
+
+    const search = searchInput.value.toLowerCase();
+    if (search) {
+      filtered = filtered.filter(a =>
+        a.title.toLowerCase().includes(search) ||
+        a.description.toLowerCase().includes(search)
+      );
+    }
+
+    const category = categoryFilter.value;
+    if (category !== "all") {
+      filtered = filtered.filter(a => a.category === category);
+    }
+
+    const sort = sortFilter.value;
+    if (sort === "price-asc") {
+      filtered.sort((a, b) => a.price - b.price);
+    } else if (sort === "price-desc") {
+      filtered.sort((a, b) => b.price - a.price);
+    } else if (sort === "date-desc") {
+      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } else if (sort === "date-asc") {
+      filtered.sort((a, b) => new Date(a.date) - new Date(b.date));
+    }
+
+    renderArticles(filtered);
+  }
+
+  searchInput.addEventListener("input", applyFilters);
+  categoryFilter.addEventListener("change", applyFilters);
+  sortFilter.addEventListener("change", applyFilters);
 });
+
