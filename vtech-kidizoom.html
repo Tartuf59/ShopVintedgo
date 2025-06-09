@@ -51,9 +51,12 @@ Voir photos pour caractéristiques et fonctionnalités."</p>
   </footer>
 
   <script>
-    function changeImage(src) {
-      document.querySelector('.main-image').src = src;
-    }
+ function changeImage(thumbnail) {
+    const main = document.getElementById('mainImage');
+    main.src = thumbnail.src;
+    main.classList.add('fade');
+    setTimeout(() => main.classList.remove('fade'), 300);
+  }
   </script>
 
 </body>
